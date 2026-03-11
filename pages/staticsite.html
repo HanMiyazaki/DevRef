@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Statik Site Deploy</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link active"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div><div class="page-title">Statik Site Deploy</div><div class="page-subtitle">// html/css/js projesi yayınlama</div></div>
+      <div class="search-bar"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="komut ara..." /></div>
+    </header>
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon blue">🌐</div>
+        <div class="category-info"><h1>Statik Site Deploy</h1><p>burakkirlak.info ve tracker.burakkirlak.info gibi projeleri yayınlama</p></div>
+      </div>
+      <div class="info-box">
+        <span class="info-icon">ℹ</span>
+        <div>
+          Aktif siteler: <strong>burakkirlak.info</strong> → /var/www/burakkirlak &nbsp;|&nbsp; <strong>tracker.burakkirlak.info</strong> → /var/www/tracker
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Yeni Subdomain Ekleme — Adım Adım</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">1. DNS A kaydı ekle (Hosting Dünyam paneli)</div><div class="cmd-code multi"><span class="line">Tür: A</span><span class="line">Ad: <span class="var">subdomain</span></span><span class="line">Değer: 213.142.148.165</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, '213.142.148.165')">IP kopyala</button>
+            <div class="cmd-desc">DNS değişikliği yayılması 1-30 dakika sürebilir.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">2. Repo'yu VPS'e clone et</div><div class="cmd-code">cd /var/www && git clone https://github.com/HanMiyazaki/<span class="var">repo-adi</span>.git</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cd /var/www && git clone https://github.com/HanMiyazaki/repo-adi.git')">kopyala</button>
+            <div class="cmd-desc">GitHub reposunu /var/www altına clone et.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">3. Nginx config oluştur</div><div class="cmd-code multi">
+              <span class="line">nano /etc/nginx/sites-available/<span class="var">site-adi</span></span>
+              <span class="comment"># İçerik:</span>
+              <span class="line">server {</span>
+              <span class="line">    listen 80;</span>
+              <span class="line">    server_name <span class="var">sub.domain.com</span>;</span>
+              <span class="line">    root /var/www/<span class="var">klasor</span>;</span>
+              <span class="line">    index index.html;</span>
+              <span class="line">    location / { try_files $uri $uri/ =404; }</span>
+              <span class="line">}</span>
+            </div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'nano /etc/nginx/sites-available/site-adi')">kopyala</button>
+            <div class="cmd-desc">Config dosyasını oluştur ve içini doldur.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">4. Aktif et ve SSL al</div><div class="cmd-code multi">
+              <span class="line">ln -s /etc/nginx/sites-available/<span class="var">site</span> /etc/nginx/sites-enabled/</span>
+              <span class="line">nginx -t && systemctl reload nginx</span>
+              <span class="line">certbot --nginx -d <span class="var">sub.domain.com</span></span>
+            </div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ln -s /etc/nginx/sites-available/site /etc/nginx/sites-enabled/\nnginx -t && systemctl reload nginx\ncertbot --nginx -d sub.domain.com')">kopyala</button>
+            <div class="cmd-desc">Siteyi aktif et, Nginx'i yenile, SSL sertifikası al.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">5. Güncelleme (sonraki değişikliklerde)</div><div class="cmd-code">cd /var/www/<span class="var">klasor</span> && git pull</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cd /var/www/tracker && git pull')">kopyala</button>
+            <div class="cmd-desc">Statik sitede servis yenilemeye gerek yok. git pull yeterli.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) { searchInput.addEventListener('input', () => { const q = searchInput.value.toLowerCase(); document.querySelectorAll('.cmd-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; }); }); }
+    function copyCmd(btn, text) { navigator.clipboard.writeText(text).then(() => { btn.textContent = '✓ kopyalandı'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800); }); }
+  </script>
+</body>
+</html>

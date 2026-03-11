@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — SSL & Certbot</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link active"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div><div class="page-title">SSL & Certbot</div><div class="page-subtitle">// let's encrypt sertifika yönetimi</div></div>
+      <div class="search-bar"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="komut ara..." /></div>
+    </header>
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon green">🛡</div>
+        <div class="category-info"><h1>SSL & Certbot</h1><p>Let's Encrypt ile ücretsiz SSL sertifikası alma ve yönetimi</p></div>
+      </div>
+      <div class="info-box">
+        <span class="info-icon">ℹ</span>
+        <div>Sertifikalar <strong>/etc/letsencrypt/live/</strong> altında saklanır. Certbot otomatik yenileme için bir cron job kurar.</div>
+      </div>
+      <div class="section">
+        <div class="section-title">Sertifika Al</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">domain için SSL al (nginx ile)</div><div class="cmd-code">certbot --nginx -d <span class="var">domain.com</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'certbot --nginx -d domain.com')">kopyala</button>
+            <div class="cmd-desc">Nginx config'i otomatik günceller, HTTPS yönlendirmesi ekler.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">subdomain dahil SSL al</div><div class="cmd-code">certbot --nginx -d <span class="var">domain.com</span> -d <span class="var">www.domain.com</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'certbot --nginx -d domain.com -d www.domain.com')">kopyala</button>
+            <div class="cmd-desc">Ana domain ve www subdomainini aynı sertifikaya dahil et.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">subdomain SSL al</div><div class="cmd-code">certbot --nginx -d <span class="var">sub.domain.com</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'certbot --nginx -d sub.domain.com')">kopyala</button>
+            <div class="cmd-desc">Yeni bir subdomain için ayrı SSL sertifikası al. DNS A kaydı önce eklenmeli.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Yönetim</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">tüm sertifikaları listele</div><div class="cmd-code">certbot certificates</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'certbot certificates')">kopyala</button>
+            <div class="cmd-desc">Sunucudaki tüm SSL sertifikalarını ve bitiş tarihlerini göster.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">sertifikaları yenile</div><div class="cmd-code">certbot renew</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'certbot renew')">kopyala</button>
+            <div class="cmd-desc">Süresi dolmak üzere olan sertifikaları yenile. Certbot bunu otomatik yapar, manuel gerekirse kullan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) { searchInput.addEventListener('input', () => { const q = searchInput.value.toLowerCase(); document.querySelectorAll('.cmd-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; }); }); }
+    function copyCmd(btn, text) { navigator.clipboard.writeText(text).then(() => { btn.textContent = '✓ kopyalandı'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800); }); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Git & GitHub</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link active"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="page-title">Git & GitHub</div>
+        <div class="page-subtitle">// versiyon kontrolü ve repo yönetimi</div>
+      </div>
+      <div class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" placeholder="komut ara..." />
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon purple">◎</div>
+        <div class="category-info">
+          <h1>Git & GitHub</h1>
+          <p>Repo başlatmadan push'a, güncellemeye kadar tüm Git workflow'u</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">İlk Kurulum</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">kimlik tanımla</div>
+              <div class="cmd-code multi">
+                <span class="line">git config --global user.email "<span class="str">burakhankirlak@outlook.com</span>"</span>
+                <span class="line">git config --global user.name "<span class="str">HanMiyazaki</span>"</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git config --global user.email &quot;burakhankirlak@outlook.com&quot;\ngit config --global user.name &quot;HanMiyazaki&quot;')">kopyala</button>
+            <div class="cmd-desc">Git commitleri için kimlik bilgisi tanımla. Bir kez yapılır.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">execution policy (Windows)</div>
+              <div class="cmd-code">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser')">kopyala</button>
+            <div class="cmd-desc">PowerShell'de script çalıştırmayı etkinleştir. Windows'ta bir kez yapılır.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Yeni Repo</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">repo başlat</div>
+              <div class="cmd-code">git init</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git init')">kopyala</button>
+            <div class="cmd-desc">Mevcut klasörü Git reposuna dönüştürür.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">remote ekle & ilk push</div>
+              <div class="cmd-code multi">
+                <span class="line">git remote add origin <span class="str">https://github.com/HanMiyazaki/REPO.git</span></span>
+                <span class="line">git branch -M main</span>
+                <span class="line">git add .</span>
+                <span class="line">git commit -m "<span class="str">initial commit</span>"</span>
+                <span class="line">git push -u origin main</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git remote add origin https://github.com/HanMiyazaki/REPO.git\ngit branch -M main\ngit add .\ngit commit -m \"initial commit\"\ngit push -u origin main')">kopyala</button>
+            <div class="cmd-desc">Yeni oluşturulan GitHub reposuna bağlan ve ilk kodu gönder.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Günlük Kullanım</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">değişiklikleri hazırla & gönder</div>
+              <div class="cmd-code multi">
+                <span class="line">git add .</span>
+                <span class="line">git commit -m "<span class="var">mesaj buraya</span>"</span>
+                <span class="line">git push</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git add .\ngit commit -m \"güncelleme\"\ngit push')">kopyala</button>
+            <div class="cmd-desc">Tüm değişiklikleri GitHub'a gönder. Her güncelleme sonrası kullanılır.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">VPS'e çek</div>
+              <div class="cmd-code">git pull</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git pull')">kopyala</button>
+            <div class="cmd-desc">GitHub'daki son değişiklikleri VPS'e indir.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">durum kontrol</div>
+              <div class="cmd-code">git status</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git status')">kopyala</button>
+            <div class="cmd-desc">Hangi dosyaların değiştiğini, hangilerinin staged olduğunu göster.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">commit geçmişi</div>
+              <div class="cmd-code">git log --oneline</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git log --oneline')">kopyala</button>
+            <div class="cmd-desc">Önceki tüm commitleri kısa formatta listele.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">zorla push (dikkatli kullan)</div>
+              <div class="cmd-code">git push -u origin main --force</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git push -u origin main --force')">kopyala</button>
+            <div class="cmd-tags"><span class="tag warning">dikkat</span></div>
+            <div class="cmd-desc">Remote'u lokal ile ezer. Conflict durumlarında kullan, ekip projesinde tehlikeli.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">.gitignore — Dışarıda tutulacaklar</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">standart Python .gitignore</div>
+              <div class="cmd-code multi">
+                <span class="line comment"># .gitignore içeriği</span>
+                <span class="line">.env</span>
+                <span class="line">venv/</span>
+                <span class="line">env/</span>
+                <span class="line">__pycache__/</span>
+                <span class="line">*.pyc</span>
+                <span class="line">database.db</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, '.env\nvenv/\nenv/\n__pycache__/\n*.pyc\ndatabase.db')">kopyala</button>
+            <div class="cmd-desc">Bu dosyalar GitHub'a gönderilmez. API key'ler ve veritabanı güvende kalır.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase();
+        document.querySelectorAll('.cmd-card').forEach(card => {
+          card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      });
+    }
+    function copyCmd(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ kopyalandı';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800);
+      });
+    }
+  </script>
+</body>
+</html>

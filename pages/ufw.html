@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — UFW & Güvenlik</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link active"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div><div class="page-title">UFW & Güvenlik</div><div class="page-subtitle">// firewall ve port yönetimi</div></div>
+      <div class="search-bar"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="komut ara..." /></div>
+    </header>
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon red">🔥</div>
+        <div class="category-info"><h1>UFW & Güvenlik</h1><p>Firewall kuralları ve port yönetimi</p></div>
+      </div>
+      <div class="warn-box">
+        <span class="warn-icon">⚠</span>
+        <div>UFW'yi etkinleştirmeden önce <strong>port 22 (SSH)</strong> mutlaka açık olmalı. Aksi halde sunucuya erişim kalıcı olarak kesilebilir.</div>
+      </div>
+      <div class="section">
+        <div class="section-title">UFW Komutları</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">mevcut kuralları gör</div><div class="cmd-code">ufw status</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ufw status')">kopyala</button>
+            <div class="cmd-desc">Aktif firewall kurallarını ve UFW durumunu göster.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">port aç</div><div class="cmd-code">ufw allow <span class="var">PORT</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ufw allow 80')">kopyala</button>
+            <div class="cmd-desc">Belirtilen porta gelen trafiğe izin ver. Örnek: 22, 80, 443, 5000.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">port kapat</div><div class="cmd-code">ufw deny <span class="var">PORT</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ufw deny 5000')">kopyala</button>
+            <div class="cmd-desc">Belirtilen portu kapat. Uygulama production'a geçince test portunu kapat.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">temel kurulum (ilk kez)</div><div class="cmd-code multi">
+              <span class="line">ufw allow 22</span>
+              <span class="line">ufw allow 80</span>
+              <span class="line">ufw allow 443</span>
+              <span class="line">ufw enable</span>
+            </div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ufw allow 22\nufw allow 80\nufw allow 443\nufw enable')">kopyala</button>
+            <div class="cmd-tags"><span class="tag warning">sıra önemli</span></div>
+            <div class="cmd-desc">SSH, HTTP ve HTTPS portlarını aç, sonra UFW'yi aktif et.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">kural sil</div><div class="cmd-code">ufw delete allow <span class="var">PORT</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ufw delete allow 5000')">kopyala</button>
+            <div class="cmd-desc">Belirtilen port için oluşturulan kuralı tamamen sil.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">UFW'yi devre dışı bırak</div><div class="cmd-code">ufw disable</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ufw disable')">kopyala</button>
+            <div class="cmd-tags"><span class="tag danger">dikkat</span></div>
+            <div class="cmd-desc">Firewall'u tamamen kapat. Sorun giderme dışında kullanma.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) { searchInput.addEventListener('input', () => { const q = searchInput.value.toLowerCase(); document.querySelectorAll('.cmd-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; }); }); }
+    function copyCmd(btn, text) { navigator.clipboard.writeText(text).then(() => { btn.textContent = '✓ kopyalandı'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800); }); }
+  </script>
+</body>
+</html>

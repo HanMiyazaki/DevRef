@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Python & Flask</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link active"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div><div class="page-title">Python & Flask</div><div class="page-subtitle">// sanal ortam ve uygulama yönetimi</div></div>
+      <div class="search-bar"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="komut ara..." /></div>
+    </header>
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon green">🐍</div>
+        <div class="category-info"><h1>Python & Flask</h1><p>Sanal ortam kurulumu, paket yönetimi ve Gunicorn ile production deploy</p></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Sanal Ortam (venv)</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">venv oluştur (Linux)</div><div class="cmd-code">python3 -m venv env</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'python3 -m venv env')">kopyala</button>
+            <div class="cmd-desc">Proje klasöründe sanal ortam oluştur. Bir kez yapılır.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">venv aktif et (Linux)</div><div class="cmd-code">source env/bin/activate</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'source env/bin/activate')">kopyala</button>
+            <div class="cmd-desc">Sanal ortamı aktif et. Terminal başında (env) görünür.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">venv aktif et (Windows)</div><div class="cmd-code">.\env\bin\activate</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, '.\\env\\bin\\activate')">kopyala</button>
+            <div class="cmd-desc">Windows PowerShell'de sanal ortamı aktif et.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">venv deaktif et</div><div class="cmd-code">deactivate</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'deactivate')">kopyala</button>
+            <div class="cmd-desc">Sanal ortamdan çık.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Paket Yönetimi</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">Flask projesi için paketler kur</div><div class="cmd-code">pip install flask authlib python-dotenv gunicorn requests</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'pip install flask authlib python-dotenv gunicorn requests')">kopyala</button>
+            <div class="cmd-desc">Dokushoka projesinde kullanılan tüm paketleri kur.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">requirements.txt oluştur</div><div class="cmd-code">pip freeze > requirements.txt</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'pip freeze > requirements.txt')">kopyala</button>
+            <div class="cmd-desc">Kurulu paketleri dosyaya kaydet. GitHub'a push etmeden önce güncelle.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">requirements.txt'ten kur</div><div class="cmd-code">pip install -r requirements.txt</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'pip install -r requirements.txt')">kopyala</button>
+            <div class="cmd-desc">Yeni ortamda tüm paketleri tek komutla kur.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Gunicorn</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">uygulamayı başlat (test)</div><div class="cmd-code">gunicorn --bind 0.0.0.0:5000 app:app</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'gunicorn --bind 0.0.0.0:5000 app:app')">kopyala</button>
+            <div class="cmd-desc">Uygulamayı Gunicorn ile çalıştır. Erişim için port 5000 UFW'de açık olmalı.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">timeout ile başlat</div><div class="cmd-code">gunicorn --bind 0.0.0.0:5000 --timeout 30 app:app</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'gunicorn --bind 0.0.0.0:5000 --timeout 30 app:app')">kopyala</button>
+            <div class="cmd-desc">Worker timeout'unu 30 saniyeye ayarla. Donma sorunlarında kullanılır.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">.env Kullanımı</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">app.py başına ekle</div>
+              <div class="cmd-code multi">
+                <span class="line">from dotenv import load_dotenv</span>
+                <span class="line">import os</span>
+                <span class="line">load_dotenv()</span>
+                <span class="line"></span>
+                <span class="line">app.secret_key = os.getenv(<span class="str">"SECRET_KEY"</span>)</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'from dotenv import load_dotenv\nimport os\nload_dotenv()\n\napp.secret_key = os.getenv(\"SECRET_KEY\")')">kopyala</button>
+            <div class="cmd-desc">.env dosyasındaki değerleri okuma. API key'leri kod içine yazma.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) { searchInput.addEventListener('input', () => { const q = searchInput.value.toLowerCase(); document.querySelectorAll('.cmd-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; }); }); }
+    function copyCmd(btn, text) { navigator.clipboard.writeText(text).then(() => { btn.textContent = '✓ kopyalandı'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800); }); }
+  </script>
+</body>
+</html>

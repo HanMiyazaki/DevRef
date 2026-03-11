@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Nginx</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link active"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div><div class="page-title">Nginx</div><div class="page-subtitle">// web sunucusu ve reverse proxy</div></div>
+      <div class="search-bar"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="komut ara..." /></div>
+    </header>
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon blue">⚡</div>
+        <div class="category-info"><h1>Nginx</h1><p>Config yönetimi, test, reload ve reverse proxy kurulumu</p></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Temel Komutlar</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">config test</div><div class="cmd-code">nginx -t</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'nginx -t')">kopyala</button>
+            <div class="cmd-desc">Config dosyasında syntax hatası olup olmadığını kontrol et. Her değişiklikten önce çalıştır.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">test & reload (güvenli)</div><div class="cmd-code">nginx -t && systemctl reload nginx</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'nginx -t && systemctl reload nginx')">kopyala</button>
+            <div class="cmd-tags"><span class="tag success">önerilen</span></div>
+            <div class="cmd-desc">Önce test eder, başarılıysa yeniden yükler. Her config değişikliğinde bunu kullan.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">yeniden başlat</div><div class="cmd-code">systemctl restart nginx</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'systemctl restart nginx')">kopyala</button>
+            <div class="cmd-desc">Nginx'i tamamen durdurur ve yeniden başlatır. Kısa süre kesinti olabilir.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">durum kontrol</div><div class="cmd-code">systemctl status nginx</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'systemctl status nginx')">kopyala</button>
+            <div class="cmd-desc">Nginx'in çalışıp çalışmadığını ve son logları göster.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Site Yönetimi</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">site aktif et</div><div class="cmd-code">ln -s /etc/nginx/sites-available/<span class="var">site</span> /etc/nginx/sites-enabled/</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ln -s /etc/nginx/sites-available/SITE /etc/nginx/sites-enabled/')">kopyala</button>
+            <div class="cmd-desc">sites-available'daki config'i sites-enabled'a bağla. Sembolik link oluşturur.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">site deaktif et</div><div class="cmd-code">rm /etc/nginx/sites-enabled/<span class="var">site</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'rm /etc/nginx/sites-enabled/SITE')">kopyala</button>
+            <div class="cmd-desc">Siteyi devre dışı bırak. sites-available'daki dosyaya dokunmaz.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">mevcut config'i düzenle</div><div class="cmd-code">nano /etc/nginx/sites-available/<span class="var">site</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'nano /etc/nginx/sites-available/burakkirlak')">kopyala</button>
+            <div class="cmd-desc">Config dosyasını nano editörde aç. Kaydetmek için CTRL+X → Y → Enter.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Config Şablonları</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">statik site config</div>
+              <div class="cmd-code multi">
+                <span class="line">server {</span>
+                <span class="line">    listen 80;</span>
+                <span class="line">    server_name <span class="var">domain.com</span>;</span>
+                <span class="line">    root /var/www/<span class="var">klasor</span>;</span>
+                <span class="line">    index index.html;</span>
+                <span class="line">    location / {</span>
+                <span class="line">        try_files $uri $uri/ =404;</span>
+                <span class="line">    }</span>
+                <span class="line">}</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'server {\n    listen 80;\n    server_name domain.com;\n    root /var/www/klasor;\n    index index.html;\n    location / {\n        try_files $uri $uri/ =404;\n    }\n}')">kopyala</button>
+            <div class="cmd-desc">HTML/CSS/JS statik site için temel config. Certbot sonrası HTTPS otomatik eklenir.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">Flask reverse proxy config</div>
+              <div class="cmd-code multi">
+                <span class="line">server {</span>
+                <span class="line">    listen 80;</span>
+                <span class="line">    server_name <span class="var">domain.com</span>;</span>
+                <span class="line">    location / {</span>
+                <span class="line">        proxy_pass http://127.0.0.1:<span class="var">5000</span>;</span>
+                <span class="line">        proxy_set_header Host $host;</span>
+                <span class="line">        proxy_set_header X-Real-IP $remote_addr;</span>
+                <span class="line">    }</span>
+                <span class="line">}</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'server {\n    listen 80;\n    server_name domain.com;\n    location / {\n        proxy_pass http://127.0.0.1:5000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n    }\n}')">kopyala</button>
+            <div class="cmd-desc">Flask/Gunicorn uygulaması için reverse proxy config. Port numarasını uygulamana göre değiştir.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) { searchInput.addEventListener('input', () => { const q = searchInput.value.toLowerCase(); document.querySelectorAll('.cmd-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; }); }); }
+    function copyCmd(btn, text) { navigator.clipboard.writeText(text).then(() => { btn.textContent = '✓ kopyalandı'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800); }); }
+  </script>
+</body>
+</html>

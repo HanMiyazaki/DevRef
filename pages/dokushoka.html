@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Dokushoka Deploy</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link active"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="page-title">Dokushoka Deploy</div>
+        <div class="page-subtitle">// dokushoka.burakkirlak.info güncelleme süreci</div>
+      </div>
+      <div class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" placeholder="komut ara..." />
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon amber">📚</div>
+        <div class="category-info">
+          <h1>Dokushoka Deploy</h1>
+          <p>Değişiklik yaptıktan sonra canlı ortama alma süreci</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <span class="info-icon">ℹ</span>
+        <div>
+          Canlı URL: <strong>https://dokushoka.burakkirlak.info</strong><br/>
+          Kod dizini: <strong>/var/www/dokushoka</strong><br/>
+          Servis adı: <strong>dokushoka</strong>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Güncelleme — Her değişiklik sonrası</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">1. Lokal değişiklikleri GitHub'a gönder</div>
+              <div class="cmd-code multi">
+                <span class="line">git add .</span>
+                <span class="line">git commit -m "<span class="var">değişiklik açıklaması</span>"</span>
+                <span class="line">git push</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'git add .\ngit commit -m \"güncelleme\"\ngit push')">kopyala</button>
+            <div class="cmd-desc">Lokalde yapılan değişiklikleri önce GitHub'a gönder.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">2. VPS'e çek ve servisi yeniden başlat</div>
+              <div class="cmd-code">cd /var/www/dokushoka && git pull && systemctl restart dokushoka</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cd /var/www/dokushoka && git pull && systemctl restart dokushoka')">kopyala</button>
+            <div class="cmd-tags"><span class="tag success">ana komut</span></div>
+            <div class="cmd-desc">SSH'ta çalıştır. GitHub'daki son kodu çeker, servisi yeniden başlatır. Tek satır, hızlı.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Servis Yönetimi</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">servis durumu</div>
+              <div class="cmd-code">systemctl status dokushoka</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'systemctl status dokushoka')">kopyala</button>
+            <div class="cmd-desc">Servisin çalışıp çalışmadığını ve son logları göster.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">hata logları</div>
+              <div class="cmd-code">journalctl -u dokushoka -n 50</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'journalctl -u dokushoka -n 50')">kopyala</button>
+            <div class="cmd-desc">Son 50 log satırını göster. Hata durumunda buraya bak.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">manuel başlat (test için)</div>
+              <div class="cmd-code multi">
+                <span class="line">systemctl stop dokushoka</span>
+                <span class="line">cd /var/www/dokushoka && source env/bin/activate</span>
+                <span class="line">gunicorn --bind 0.0.0.0:5000 app:app</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'systemctl stop dokushoka\ncd /var/www/dokushoka && source env/bin/activate\ngunicorn --bind 0.0.0.0:5000 app:app')">kopyala</button>
+            <div class="cmd-desc">Servisi durdurup terminalden başlat. Hataları canlı izlemek için kullanılır.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Admin Yönetimi</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">kullanıcıya admin yetkisi ver</div>
+              <div class="cmd-code multi">
+                <span class="line">cd /var/www/dokushoka</span>
+                <span class="line">sqlite3 database.db</span>
+                <span class="line comment"># SQLite açıldıktan sonra:</span>
+                <span class="line">UPDATE users SET is_admin = <span class="str">1</span> WHERE email = '<span class="var">email@domain.com</span>';</span>
+                <span class="comment"># Çıkmak için CTRL+D</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cd /var/www/dokushoka\nsqlite3 database.db\nUPDATE users SET is_admin = 1 WHERE email = \'email@domain.com\';')">kopyala</button>
+            <div class="cmd-desc">Belirtilen e-posta adresine admin yetkisi ver. Kitap ekleme/düzenleme yetkisi kazanır.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">tüm kullanıcıları listele</div>
+              <div class="cmd-code multi">
+                <span class="line">sqlite3 database.db</span>
+                <span class="line">SELECT id, email, is_admin FROM users;</span>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'sqlite3 database.db\nSELECT id, email, is_admin FROM users;')">kopyala</button>
+            <div class="cmd-desc">Kayıtlı tüm kullanıcıları ve admin durumlarını göster.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase();
+        document.querySelectorAll('.cmd-card').forEach(card => {
+          card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      });
+    }
+    function copyCmd(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ kopyalandı';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800);
+      });
+    }
+  </script>
+</body>
+</html>

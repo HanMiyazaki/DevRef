@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Linux Temelleri</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link active"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div><div class="page-title">Linux Temelleri</div><div class="page-subtitle">// dosya yönetimi, process, paket kurulumu</div></div>
+      <div class="search-bar"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="komut ara..." /></div>
+    </header>
+    <div class="content">
+      <div class="category-header">
+        <div class="category-icon green">🐧</div>
+        <div class="category-info"><h1>Linux Temelleri</h1><p>Günlük kullanımda işe yarayan temel Linux komutları</p></div>
+      </div>
+      <div class="section">
+        <div class="section-title">Dosya & Klasör</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">içeriği listele</div><div class="cmd-code">ls -la</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ls -la')">kopyala</button>
+            <div class="cmd-desc">Gizli dosyalar dahil tüm dosyaları izinleriyle listele.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">klasör gir</div><div class="cmd-code">cd /var/www/dokushoka</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cd /var/www/dokushoka')">kopyala</button>
+            <div class="cmd-desc">Belirtilen dizine geç.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">dosya içeriğini oku</div><div class="cmd-code">cat <span class="var">dosya.txt</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cat dosya.txt')">kopyala</button>
+            <div class="cmd-desc">Dosyanın tüm içeriğini terminale yazdır.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">dosya düzenle</div><div class="cmd-code">nano <span class="var">dosya.txt</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'nano dosya.txt')">kopyala</button>
+            <div class="cmd-desc">Nano editörde aç. Kaydet: CTRL+X → Y → Enter.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">klasör oluştur</div><div class="cmd-code">mkdir -p /var/www/<span class="var">yeni-klasor</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'mkdir -p /var/www/yeni-klasor')">kopyala</button>
+            <div class="cmd-desc">Klasör oluştur. -p ile ara klasörler de oluşturulur.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">dosya kopyala</div><div class="cmd-code">cp <span class="var">kaynak</span> <span class="var">hedef</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'cp kaynak hedef')">kopyala</button>
+            <div class="cmd-desc">Dosyayı kopyala. Klasör için cp -r kullan.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">dosya taşı / yeniden adlandır</div><div class="cmd-code">mv <span class="var">eski-ad</span> <span class="var">yeni-ad</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'mv eski-ad yeni-ad')">kopyala</button>
+            <div class="cmd-desc">Dosyayı taşı veya adını değiştir.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">dosya sil</div><div class="cmd-code">rm <span class="var">dosya</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'rm dosya')">kopyala</button>
+            <div class="cmd-tags"><span class="tag danger">geri alınamaz</span></div>
+            <div class="cmd-desc">Dosyayı sil. Klasör için rm -rf kullan — dikkatli ol.</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Paket & Sistem</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div><div class="cmd-label">paket kur</div><div class="cmd-code">apt install <span class="var">paket-adi</span> -y</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'apt install paket-adi -y')">kopyala</button>
+            <div class="cmd-desc">Ubuntu'ya paket kur. -y ile onay sormadan devam eder.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">paket listesini güncelle</div><div class="cmd-code">apt update</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'apt update')">kopyala</button>
+            <div class="cmd-desc">Paket listesini yenile. Kurulumdan önce çalıştır.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">metin içinde ara</div><div class="cmd-code">grep -r "<span class="var">aranacak</span>" /var/www/</div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'grep -r "aranacak" /var/www/')">kopyala</button>
+            <div class="cmd-desc">Belirtilen dizinde tüm dosyalarda metin ara.</div>
+          </div>
+          <div class="cmd-card">
+            <div><div class="cmd-label">process öldür</div><div class="cmd-code">kill -9 <span class="var">PID</span></div></div>
+            <button class="copy-btn" onclick="copyCmd(this, 'kill -9 PID')">kopyala</button>
+            <div class="cmd-desc">PID numarasını ss -tlnp veya ps aux ile bul.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) { searchInput.addEventListener('input', () => { const q = searchInput.value.toLowerCase(); document.querySelectorAll('.cmd-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none'; }); }); }
+    function copyCmd(btn, text) { navigator.clipboard.writeText(text).then(() => { btn.textContent = '✓ kopyalandı'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800); }); }
+  </script>
+</body>
+</html>

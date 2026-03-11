@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — SSH & VPS</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-text">DevRef</div><div class="logo-sub">// komut referansı</div></div>
+    <nav>
+      <div class="nav-section"><div class="nav-section-title">Genel</div><a href="../index.html" class="nav-link"><span class="icon">⌂</span> Ana Sayfa</a></div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="ssh.html" class="nav-link active"><span class="icon">🔒</span> SSH & VPS<span class="nav-badge">8</span></a>
+        <a href="nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span class="nav-badge">9</span></a>
+        <a href="ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span class="nav-badge">5</span></a>
+        <a href="systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span class="nav-badge">10</span></a>
+        <a href="python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span class="nav-badge">8</span></a>
+        <a href="database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span class="nav-badge">6</span></a>
+        <a href="staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span class="nav-badge">12</span></a>
+        <a href="ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="page-title">SSH & VPS</div>
+        <div class="page-subtitle">// sunucu bağlantısı ve yönetimi</div>
+      </div>
+      <div class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" placeholder="komut ara..." />
+      </div>
+    </header>
+
+    <div class="content" id="pageContent">
+      <div class="category-header">
+        <div class="category-icon blue">🔒</div>
+        <div class="category-info">
+          <h1>SSH & VPS</h1>
+          <p>Sunucuya bağlanma, dosya aktarımı ve temel VPS yönetimi</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <span class="info-icon">ℹ</span>
+        <div>VPS IP: <strong>213.142.148.165</strong> — Kullanıcı: <strong>root</strong> — OS: Ubuntu 22.04 LTS</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Bağlantı</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">sunucuya bağlan</div>
+              <div class="cmd-code">ssh root@213.142.148.165</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ssh root@213.142.148.165')">kopyala</button>
+            <div class="cmd-desc">VPS'e root kullanıcısı ile SSH bağlantısı kur. Şifre sorulur.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">bağlantıyı kes</div>
+              <div class="cmd-code">exit</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'exit')">kopyala</button>
+            <div class="cmd-desc">SSH oturumunu güvenli şekilde kapat.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">bağlı oturumları gör</div>
+              <div class="cmd-code">who</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'who')">kopyala</button>
+            <div class="cmd-desc">Şu an sunucuya bağlı kullanıcıları listeler.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Dosya Transferi</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">dosya yükle (local → VPS)</div>
+              <div class="cmd-code">scp /local/dosya.html root@213.142.148.165:/var/www/burakkirlak/</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'scp /local/dosya.html root@213.142.148.165:/var/www/burakkirlak/')">kopyala</button>
+            <div class="cmd-desc">Lokal dosyayı VPS'e kopyala. Yolu değiştirerek kullan.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">klasör yükle (recursive)</div>
+              <div class="cmd-code">scp -r /local/klasor root@213.142.148.165:/var/www/</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'scp -r /local/klasor root@213.142.148.165:/var/www/')">kopyala</button>
+            <div class="cmd-desc">Tüm klasörü alt dosyalarıyla birlikte VPS'e kopyala.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">dosya indir (VPS → local)</div>
+              <div class="cmd-code">scp root@213.142.148.165:/var/www/dosya.html ./</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'scp root@213.142.148.165:/var/www/dosya.html ./')">kopyala</button>
+            <div class="cmd-desc">VPS'teki dosyayı yerel makineye indir.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Sunucu Durumu</div>
+        <div class="cmd-grid">
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">disk kullanımı</div>
+              <div class="cmd-code">df -h</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'df -h')">kopyala</button>
+            <div class="cmd-desc">Disk alanı kullanımını okunabilir formatta göster.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">ram & cpu durumu</div>
+              <div class="cmd-code">htop</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'htop')">kopyala</button>
+            <div class="cmd-desc">Canlı sistem kaynak monitörü. Çıkmak için q.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">açık portları listele</div>
+              <div class="cmd-code">ss -tlnp</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'ss -tlnp')">kopyala</button>
+            <div class="cmd-desc">Dinleyen tüm TCP portlarını ve ilgili process'leri göster.</div>
+          </div>
+          <div class="cmd-card">
+            <div>
+              <div class="cmd-label">sunucuyu yeniden başlat</div>
+              <div class="cmd-code">reboot</div>
+            </div>
+            <button class="copy-btn" onclick="copyCmd(this, 'reboot')">kopyala</button>
+            <div class="cmd-tags"><span class="tag danger">dikkat</span></div>
+            <div class="cmd-desc">Sunucuyu yeniden başlatır. Bağlantı kesilir, ~30 sn sonra tekrar bağlan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase();
+        document.querySelectorAll('.cmd-card').forEach(card => {
+          card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      });
+    }
+    function copyCmd(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ kopyalandı';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'kopyala'; btn.classList.remove('copied'); }, 1800);
+      });
+    }
+  </script>
+</body>
+</html>
