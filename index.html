@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevRef — Ana Sayfa</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">DevRef</div>
+      <div class="logo-sub">// komut referansı</div>
+    </div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Genel</div>
+        <a href="index.html" class="nav-link active"><span class="icon">⌂</span> Ana Sayfa</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sunucu</div>
+        <a href="pages/ssh.html" class="nav-link"><span class="icon">🔒</span> SSH & VPS<span
+            class="nav-badge">8</span></a>
+        <a href="pages/nginx.html" class="nav-link"><span class="icon">⚡</span> Nginx<span
+            class="nav-badge">9</span></a>
+        <a href="pages/ssl.html" class="nav-link"><span class="icon">🛡</span> SSL & Certbot<span
+            class="nav-badge">5</span></a>
+        <a href="pages/systemd.html" class="nav-link"><span class="icon">⚙</span> Systemd & Servis<span
+            class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Geliştirme</div>
+        <a href="pages/git.html" class="nav-link"><span class="icon">◎</span> Git & GitHub<span
+            class="nav-badge">10</span></a>
+        <a href="pages/python.html" class="nav-link"><span class="icon">🐍</span> Python & Flask<span
+            class="nav-badge">8</span></a>
+        <a href="pages/database.html" class="nav-link"><span class="icon">◈</span> SQLite & DB<span
+            class="nav-badge">7</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Projeler</div>
+        <a href="pages/dokushoka.html" class="nav-link"><span class="icon">📚</span> Dokushoka Deploy<span
+            class="nav-badge">6</span></a>
+        <a href="pages/staticsite.html" class="nav-link"><span class="icon">🌐</span> Statik Site Deploy<span
+            class="nav-badge">5</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Sistem</div>
+        <a href="pages/linux.html" class="nav-link"><span class="icon">🐧</span> Linux Temelleri<span
+            class="nav-badge">12</span></a>
+        <a href="pages/ufw.html" class="nav-link"><span class="icon">🔥</span> UFW & Güvenlik<span
+            class="nav-badge">6</span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="page-title">Ana Sayfa</div>
+        <div class="page-subtitle">// tüm kategoriler</div>
+      </div>
+      <div class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="komut ara..." />
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="hero">
+        <h1>Tüm komutlar,<br /><span>tek yerde.</span></h1>
+        <p>SSH bağlantısından Nginx config'e, Git workflow'dan Flask deploy'a — hepsine hızlıca ulaş.</p>
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-num">83</div>
+            <div class="stat-label">Komut</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">11</div>
+            <div class="stat-label">Kategori</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Canlı proje</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Kategoriler</div>
+
+      <div class="home-grid">
+        <a href="pages/ssh.html" class="home-card">
+          <div class="card-icon">🔒</div>
+          <div class="card-title">SSH & VPS</div>
+          <div class="card-desc">Sunucuya bağlanma, dosya transferi, temel VPS kurulum komutları.</div>
+          <div class="card-count">8 komut</div>
+        </a>
+        <a href="pages/nginx.html" class="home-card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Nginx</div>
+          <div class="card-desc">Config oluşturma, reverse proxy, site enable/disable, reload.</div>
+          <div class="card-count">9 komut</div>
+        </a>
+        <a href="pages/ssl.html" class="home-card">
+          <div class="card-icon">🛡</div>
+          <div class="card-title">SSL & Certbot</div>
+          <div class="card-desc">Let's Encrypt sertifikası alma, yenileme, subdomain SSL.</div>
+          <div class="card-count">5 komut</div>
+        </a>
+        <a href="pages/systemd.html" class="home-card">
+          <div class="card-icon">⚙</div>
+          <div class="card-title">Systemd & Servis</div>
+          <div class="card-desc">Servis oluşturma, başlatma, durdurma, log izleme.</div>
+          <div class="card-count">7 komut</div>
+        </a>
+        <a href="pages/git.html" class="home-card">
+          <div class="card-icon">◎</div>
+          <div class="card-title">Git & GitHub</div>
+          <div class="card-desc">Repo init, commit, push, pull, branch yönetimi.</div>
+          <div class="card-count">10 komut</div>
+        </a>
+        <a href="pages/python.html" class="home-card">
+          <div class="card-icon">🐍</div>
+          <div class="card-title">Python & Flask</div>
+          <div class="card-desc">Venv kurulum, pip, Gunicorn çalıştırma, debug modu.</div>
+          <div class="card-count">8 komut</div>
+        </a>
+        <a href="pages/database.html" class="home-card">
+          <div class="card-icon">◈</div>
+          <div class="card-title">SQLite & DB</div>
+          <div class="card-desc">Veritabanı açma, tablo sorgulama, veri güncelleme, admin atama.</div>
+          <div class="card-count">7 komut</div>
+        </a>
+        <a href="pages/dokushoka.html" class="home-card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">Dokushoka Deploy</div>
+          <div class="card-desc">Dokushoka projesini güncellemek için tüm deploy süreci.</div>
+          <div class="card-count">6 komut</div>
+        </a>
+        <a href="pages/staticsite.html" class="home-card">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">Statik Site Deploy</div>
+          <div class="card-desc">HTML/CSS/JS projesini VPS'e deploy etme ve güncelleme.</div>
+          <div class="card-count">5 komut</div>
+        </a>
+        <a href="pages/linux.html" class="home-card">
+          <div class="card-icon">🐧</div>
+          <div class="card-title">Linux Temelleri</div>
+          <div class="card-desc">Dosya yönetimi, izinler, process, paket yönetimi.</div>
+          <div class="card-count">12 komut</div>
+        </a>
+        <a href="pages/ufw.html" class="home-card">
+          <div class="card-icon">🔥</div>
+          <div class="card-title">UFW & Güvenlik</div>
+          <div class="card-desc">Firewall kuralları, port yönetimi, güvenli sunucu yapılandırması.</div>
+          <div class="card-count">6 komut</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.href === window.location.href) link.classList.add('active');
+    });
+  </script>
+</body>
+
+</html>
